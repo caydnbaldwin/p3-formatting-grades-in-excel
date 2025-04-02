@@ -2,7 +2,7 @@ from openpyxl import *
 
 # Access sheet from input file
 oInputWorkbook = load_workbook("Poorly_Organized_Data_1.xlsx", data_only=True)
-InputWorksheet = oInputWorkbook.active
+InputWorksheet = oInputWorkbook["Grades"]
 
 # Create ouput file, remove default sheet
 oOutputWorkbook = Workbook()
@@ -11,12 +11,11 @@ oOutputWorkbook.remove(oOutputWorkbook["Sheet"])
 # Create a set, iterate through column A, add unique names to set
 setClassNames = set()
 iRowNumber = 2
-ws = oInputWorkbook["Grades"]
-location = ws[f"A{iRowNumber}"].value
+location = InputWorksheet[f"A{iRowNumber}"].value
 while location:
     setClassNames.add(location)
     iRowNumber += 1
-    location = ws[f"A{iRowNumber}"].value
+    location = InputWorksheet[f"A{iRowNumber}"].value
 
 # Create sheet
 for sClassName in setClassNames:
